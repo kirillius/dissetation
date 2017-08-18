@@ -1,0 +1,11 @@
+c:\users\elena\documents\visual studio 2015\Projects\scienceAp\ScienceApp\bin\Debug\ScienceApp.exe.config
+c:\users\elena\documents\visual studio 2015\Projects\scienceAp\ScienceApp\bin\Debug\ScienceApp.exe
+c:\users\elena\documents\visual studio 2015\Projects\scienceAp\ScienceApp\bin\Debug\ScienceApp.pdb
+c:\users\elena\documents\visual studio 2015\Projects\scienceAp\ScienceApp\obj\Debug\ScienceApp.csprojResolveAssemblyReference.cache
+c:\users\elena\documents\visual studio 2015\Projects\scienceAp\ScienceApp\obj\Debug\ScienceApp.experimentForm.resources
+c:\users\elena\documents\visual studio 2015\Projects\scienceAp\ScienceApp\obj\Debug\ScienceApp.Form1.resources
+c:\users\elena\documents\visual studio 2015\Projects\scienceAp\ScienceApp\obj\Debug\ScienceApp.Properties.Resources.resources
+c:\users\elena\documents\visual studio 2015\Projects\scienceAp\ScienceApp\obj\Debug\ScienceApp.csproj.GenerateResource.Cache
+c:\users\elena\documents\visual studio 2015\Projects\scienceAp\ScienceApp\obj\Debug\ScienceApp.exe
+c:\users\elena\documents\visual studio 2015\Projects\scienceAp\ScienceApp\obj\Debug\ScienceApp.pdb
+c:\users\elena\documents\visual studio 2015\Projects\scienceAp\ScienceApp\obj\Debug\ScienceApp.historyForm.resources
