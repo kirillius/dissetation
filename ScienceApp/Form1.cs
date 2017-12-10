@@ -1,4 +1,5 @@
-﻿using System;
+﻿using scinceAppWF;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -36,6 +37,20 @@ namespace ScienceApp
             historyForm history = new historyForm();
             history.MdiParent = this;
             history.Show();
+        }
+
+        private void подключениеКБДToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SettingDB setting = new SettingDB();
+            setting.MdiParent = this;
+            setting.Show();
+        }
+
+        private void справочникиБДToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dictionariesForm dictionaries = new dictionariesForm();
+            dictionaries.MdiParent = this;
+            dictionaries.Show();
         }
     }
 }

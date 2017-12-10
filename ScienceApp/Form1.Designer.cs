@@ -35,6 +35,7 @@
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.подключениеКБДToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.справочникиБДToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -82,7 +83,8 @@
             // настройкиToolStripMenuItem
             // 
             this.настройкиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.подключениеКБДToolStripMenuItem});
+            this.подключениеКБДToolStripMenuItem,
+            this.справочникиБДToolStripMenuItem});
             this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
             this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
             this.настройкиToolStripMenuItem.Text = "Настройки";
@@ -92,6 +94,14 @@
             this.подключениеКБДToolStripMenuItem.Name = "подключениеКБДToolStripMenuItem";
             this.подключениеКБДToolStripMenuItem.Size = new System.Drawing.Size(240, 22);
             this.подключениеКБДToolStripMenuItem.Text = "Настройки подключения к БД";
+            this.подключениеКБДToolStripMenuItem.Click += new System.EventHandler(this.подключениеКБДToolStripMenuItem_Click);
+            // 
+            // справочникиБДToolStripMenuItem
+            // 
+            this.справочникиБДToolStripMenuItem.Name = "справочникиБДToolStripMenuItem";
+            this.справочникиБДToolStripMenuItem.Size = new System.Drawing.Size(240, 22);
+            this.справочникиБДToolStripMenuItem.Text = "Справочники БД";
+            this.справочникиБДToolStripMenuItem.Click += new System.EventHandler(this.справочникиБДToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -121,6 +131,7 @@
         private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem подключениеКБДToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem справочникиБДToolStripMenuItem;
     }
 }
 

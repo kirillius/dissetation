@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.nameDictionary = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.countRequest = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.startButton = new System.Windows.Forms.Button();
             this.clearButton = new System.Windows.Forms.Button();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDictionary = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.countRequest = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
@@ -54,6 +54,18 @@
             this.dataGridView1.Size = new System.Drawing.Size(288, 150);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
+            // 
+            // nameDictionary
+            // 
+            this.nameDictionary.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nameDictionary.HeaderText = "Справочник";
+            this.nameDictionary.Name = "nameDictionary";
+            this.nameDictionary.ReadOnly = true;
+            // 
+            // countRequest
+            // 
+            this.countRequest.HeaderText = "Количество запросов";
+            this.countRequest.Name = "countRequest";
             // 
             // button1
             // 
@@ -88,6 +100,13 @@
             this.dataGridView2.Size = new System.Drawing.Size(288, 150);
             this.dataGridView2.TabIndex = 3;
             // 
+            // name
+            // 
+            this.name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.name.HeaderText = "Справочник";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            // 
             // startButton
             // 
             this.startButton.Enabled = false;
@@ -95,7 +114,7 @@
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(75, 23);
             this.startButton.TabIndex = 4;
-            this.startButton.Text = "Start";
+            this.startButton.Text = "Старт";
             this.startButton.UseVisualStyleBackColor = true;
             // 
             // clearButton
@@ -104,27 +123,8 @@
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(75, 23);
             this.clearButton.TabIndex = 5;
-            this.clearButton.Text = "Clear";
+            this.clearButton.Text = "Очистить";
             this.clearButton.UseVisualStyleBackColor = true;
-            // 
-            // name
-            // 
-            this.name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.name.HeaderText = "Справочник";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            // 
-            // nameDictionary
-            // 
-            this.nameDictionary.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nameDictionary.HeaderText = "Справочник";
-            this.nameDictionary.Name = "nameDictionary";
-            this.nameDictionary.ReadOnly = true;
-            // 
-            // countRequest
-            // 
-            this.countRequest.HeaderText = "Количество запросов";
-            this.countRequest.Name = "countRequest";
             // 
             // experimentForm
             // 
