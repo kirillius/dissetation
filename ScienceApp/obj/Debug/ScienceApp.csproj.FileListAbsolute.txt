@@ -10,3 +10,5 @@ c:\users\elena\documents\visual studio 2015\Projects\scienceAp\ScienceApp\obj\De
 c:\users\elena\documents\visual studio 2015\Projects\scienceAp\ScienceApp\obj\Debug\ScienceApp.pdb
 c:\users\elena\documents\visual studio 2015\Projects\scienceAp\ScienceApp\obj\Debug\ScienceApp.historyForm.resources
 C:\Users\Elena\documents\visual studio 2015\Projects\scienceAp\ScienceApp\obj\Debug\ScienceApp.dictionariesForm.resources
+C:\Users\Elena\documents\visual studio 2015\Projects\scienceAp\ScienceApp\bin\Debug\EntityFramework.dll
+C:\Users\Elena\documents\visual studio 2015\Projects\scienceAp\ScienceApp\bin\Debug\EntityFramework.xml

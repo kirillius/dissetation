@@ -1,0 +1,354 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище dissertationModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="dictionaries">
+          <Key>
+            <PropertyRef Name="idDict" />
+          </Key>
+          <Property Name="idDict" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameTable" Type="nvarchar(max)" />
+          <Property Name="displayName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="mos">
+          <Key>
+            <PropertyRef Name="idMO" />
+          </Key>
+          <Property Name="idMO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" />
+          <Property Name="fullName" Type="nvarchar(max)" />
+          <Property Name="idChief" Type="int" />
+          <Property Name="parent" Type="int" />
+        </EntityType>
+        <EntityType Name="persons">
+          <Key>
+            <PropertyRef Name="idPerson" />
+          </Key>
+          <Property Name="idPerson" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" />
+          <Property Name="dateOfBirth" Type="datetime" />
+        </EntityType>
+        <EntityType Name="specializations">
+          <Key>
+            <PropertyRef Name="idSpec" />
+          </Key>
+          <Property Name="idSpec" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" />
+          <Property Name="parent" Type="int" />
+        </EntityType>
+        <EntityType Name="specsMO">
+          <Key>
+            <PropertyRef Name="idSpec" />
+            <PropertyRef Name="idMO" />
+          </Key>
+          <Property Name="idSpec" Type="int" Nullable="false" />
+          <Property Name="idMO" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_mos_mos">
+          <End Role="mos" Type="Self.mos" Multiplicity="0..1" />
+          <End Role="mos1" Type="Self.mos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mos">
+              <PropertyRef Name="idMO" />
+            </Principal>
+            <Dependent Role="mos1">
+              <PropertyRef Name="parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mos_persons">
+          <End Role="persons" Type="Self.persons" Multiplicity="0..1" />
+          <End Role="mos" Type="Self.mos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persons">
+              <PropertyRef Name="idPerson" />
+            </Principal>
+            <Dependent Role="mos">
+              <PropertyRef Name="idChief" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_specializations_specializations">
+          <End Role="specializations" Type="Self.specializations" Multiplicity="0..1" />
+          <End Role="specializations1" Type="Self.specializations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="specializations">
+              <PropertyRef Name="idSpec" />
+            </Principal>
+            <Dependent Role="specializations1">
+              <PropertyRef Name="parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_specsMO_mos">
+          <End Role="mos" Type="Self.mos" Multiplicity="1" />
+          <End Role="specsMO" Type="Self.specsMO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mos">
+              <PropertyRef Name="idMO" />
+            </Principal>
+            <Dependent Role="specsMO">
+              <PropertyRef Name="idMO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_specsMO_specializations">
+          <End Role="specializations" Type="Self.specializations" Multiplicity="1" />
+          <End Role="specsMO" Type="Self.specsMO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="specializations">
+              <PropertyRef Name="idSpec" />
+            </Principal>
+            <Dependent Role="specsMO">
+              <PropertyRef Name="idSpec" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище dissertationModelContainer">
+          <EntitySet Name="dictionaries" EntityType="Self.dictionaries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mos" EntityType="Self.mos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="persons" EntityType="Self.persons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="specializations" EntityType="Self.specializations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="specsMO" EntityType="Self.specsMO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_mos_mos" Association="Self.FK_mos_mos">
+            <End Role="mos" EntitySet="mos" />
+            <End Role="mos1" EntitySet="mos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mos_persons" Association="Self.FK_mos_persons">
+            <End Role="persons" EntitySet="persons" />
+            <End Role="mos" EntitySet="mos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_specializations_specializations" Association="Self.FK_specializations_specializations">
+            <End Role="specializations" EntitySet="specializations" />
+            <End Role="specializations1" EntitySet="specializations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_specsMO_mos" Association="Self.FK_specsMO_mos">
+            <End Role="mos" EntitySet="mos" />
+            <End Role="specsMO" EntitySet="specsMO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_specsMO_specializations" Association="Self.FK_specsMO_specializations">
+            <End Role="specializations" EntitySet="specializations" />
+            <End Role="specsMO" EntitySet="specsMO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dissertationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="dictionaries">
+          <Key>
+            <PropertyRef Name="idDict" />
+          </Key>
+          <Property Name="idDict" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameTable" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="displayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="mos">
+          <Key>
+            <PropertyRef Name="idMO" />
+          </Key>
+          <Property Name="idMO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="fullName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="idChief" Type="Int32" />
+          <Property Name="parent" Type="Int32" />
+          <NavigationProperty Name="mos1" Relationship="Self.FK_mos_mos" FromRole="mos" ToRole="mos1" />
+          <NavigationProperty Name="mos2" Relationship="Self.FK_mos_mos" FromRole="mos1" ToRole="mos" />
+          <NavigationProperty Name="persons" Relationship="Self.FK_mos_persons" FromRole="mos" ToRole="persons" />
+          <NavigationProperty Name="specializations" Relationship="Self.specsMO" FromRole="mos" ToRole="specializations" />
+        </EntityType>
+        <EntityType Name="persons">
+          <Key>
+            <PropertyRef Name="idPerson" />
+          </Key>
+          <Property Name="idPerson" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="dateOfBirth" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="mos" Relationship="Self.FK_mos_persons" FromRole="persons" ToRole="mos" />
+        </EntityType>
+        <EntityType Name="specializations">
+          <Key>
+            <PropertyRef Name="idSpec" />
+          </Key>
+          <Property Name="idSpec" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="parent" Type="Int32" />
+          <NavigationProperty Name="specializations1" Relationship="Self.FK_specializations_specializations" FromRole="specializations" ToRole="specializations1" />
+          <NavigationProperty Name="specializations2" Relationship="Self.FK_specializations_specializations" FromRole="specializations1" ToRole="specializations" />
+          <NavigationProperty Name="mos" Relationship="Self.specsMO" FromRole="specializations" ToRole="mos" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_mos_mos">
+          <End Role="mos" Type="Self.mos" Multiplicity="0..1" />
+          <End Role="mos1" Type="Self.mos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mos">
+              <PropertyRef Name="idMO" />
+            </Principal>
+            <Dependent Role="mos1">
+              <PropertyRef Name="parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mos_persons">
+          <End Role="persons" Type="Self.persons" Multiplicity="0..1" />
+          <End Role="mos" Type="Self.mos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persons">
+              <PropertyRef Name="idPerson" />
+            </Principal>
+            <Dependent Role="mos">
+              <PropertyRef Name="idChief" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_specializations_specializations">
+          <End Role="specializations" Type="Self.specializations" Multiplicity="0..1" />
+          <End Role="specializations1" Type="Self.specializations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="specializations">
+              <PropertyRef Name="idSpec" />
+            </Principal>
+            <Dependent Role="specializations1">
+              <PropertyRef Name="parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="specsMO">
+          <End Role="mos" Type="Self.mos" Multiplicity="*" />
+          <End Role="specializations" Type="Self.specializations" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="dissertationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="dictionaries" EntityType="Self.dictionaries" />
+          <EntitySet Name="mos" EntityType="Self.mos" />
+          <EntitySet Name="persons" EntityType="Self.persons" />
+          <EntitySet Name="specializations" EntityType="Self.specializations" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_mos_mos" Association="Self.FK_mos_mos">
+            <End Role="mos" EntitySet="mos" />
+            <End Role="mos1" EntitySet="mos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mos_persons" Association="Self.FK_mos_persons">
+            <End Role="persons" EntitySet="persons" />
+            <End Role="mos" EntitySet="mos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_specializations_specializations" Association="Self.FK_specializations_specializations">
+            <End Role="specializations" EntitySet="specializations" />
+            <End Role="specializations1" EntitySet="specializations" />
+          </AssociationSet>
+          <AssociationSet Name="specsMO" Association="Self.specsMO">
+            <End Role="mos" EntitySet="mos" />
+            <End Role="specializations" EntitySet="specializations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище dissertationModelContainer" CdmEntityContainer="dissertationEntities">
+          <EntitySetMapping Name="dictionaries">
+            <EntityTypeMapping TypeName="dissertationModel.dictionaries">
+              <MappingFragment StoreEntitySet="dictionaries">
+                <ScalarProperty Name="idDict" ColumnName="idDict" />
+                <ScalarProperty Name="nameTable" ColumnName="nameTable" />
+                <ScalarProperty Name="displayName" ColumnName="displayName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mos">
+            <EntityTypeMapping TypeName="dissertationModel.mos">
+              <MappingFragment StoreEntitySet="mos">
+                <ScalarProperty Name="idMO" ColumnName="idMO" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+                <ScalarProperty Name="idChief" ColumnName="idChief" />
+                <ScalarProperty Name="parent" ColumnName="parent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="persons">
+            <EntityTypeMapping TypeName="dissertationModel.persons">
+              <MappingFragment StoreEntitySet="persons">
+                <ScalarProperty Name="idPerson" ColumnName="idPerson" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="dateOfBirth" ColumnName="dateOfBirth" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="specializations">
+            <EntityTypeMapping TypeName="dissertationModel.specializations">
+              <MappingFragment StoreEntitySet="specializations">
+                <ScalarProperty Name="idSpec" ColumnName="idSpec" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="parent" ColumnName="parent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="dissertationModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="specsMO" TypeName="dissertationModel.specsMO" StoreEntitySet="specsMO">
+            <EndProperty Name="mos">
+              <ScalarProperty Name="idMO" ColumnName="idMO" />
+            </EndProperty>
+            <EndProperty Name="specializations">
+              <ScalarProperty Name="idSpec" ColumnName="idSpec" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

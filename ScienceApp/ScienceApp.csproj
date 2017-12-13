@@ -33,8 +33,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,6 +55,36 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectionDB.cs" />
+    <Compile Include="db\dictionaries.cs">
+      <DependentUpon>science.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db\mos.cs">
+      <DependentUpon>science.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db\persons.cs">
+      <DependentUpon>science.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db\science.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>science.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db\science.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>science.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db\science.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>science.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="db\specializations.cs">
+      <DependentUpon>science.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db\sysdiagrams.cs">
+      <DependentUpon>science.tt</DependentUpon>
+    </Compile>
     <Compile Include="dictionariesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +138,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EntityDeploy Include="db\science.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>science.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="db\science.edmx.diagram">
+      <DependentUpon>science.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -112,6 +158,22 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="db\science.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>science.edmx</DependentUpon>
+      <LastGenOutput>science.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="db\science.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>science.edmx</DependentUpon>
+      <LastGenOutput>science.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
