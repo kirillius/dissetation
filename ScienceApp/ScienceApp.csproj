@@ -109,6 +109,13 @@
     <Compile Include="historyForm.Designer.cs">
       <DependentUpon>historyForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="interfaces\onCreateDictionary.cs" />
+    <Compile Include="newDictionary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="newDictionary.Designer.cs">
+      <DependentUpon>newDictionary.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingDB.cs">
@@ -128,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="historyForm.resx">
       <DependentUpon>historyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="newDictionary.resx">
+      <DependentUpon>newDictionary.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

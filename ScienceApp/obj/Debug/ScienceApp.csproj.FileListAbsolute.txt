@@ -12,3 +12,4 @@ c:\users\elena\documents\visual studio 2015\Projects\scienceAp\ScienceApp\obj\De
 C:\Users\Elena\documents\visual studio 2015\Projects\scienceAp\ScienceApp\obj\Debug\ScienceApp.dictionariesForm.resources
 C:\Users\Elena\documents\visual studio 2015\Projects\scienceAp\ScienceApp\bin\Debug\EntityFramework.dll
 C:\Users\Elena\documents\visual studio 2015\Projects\scienceAp\ScienceApp\bin\Debug\EntityFramework.xml
+C:\Users\Elena\documents\visual studio 2015\Projects\scienceAp\ScienceApp\obj\Debug\ScienceApp.newDictionary.resources

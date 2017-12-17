@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScienceApp.db;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,7 @@ namespace ScienceApp
 {
     public partial class experimentForm : Form
     {
+        dissertationEntities context = new dissertationEntities();
         public experimentForm()
         {
             InitializeComponent();
@@ -19,10 +21,10 @@ namespace ScienceApp
 
         private void experimentForm_Load(object sender, EventArgs e)
         {
-            string[] listDictionaries = new string[] { "Пользователи", "Подразделения", "Дисциплины" };
+            List<dictionaries> listDictionaries = context.dictionaries.ToList(); 
             foreach(var item in listDictionaries)
             {
-                dataGridView2.Rows.Add(item);
+                dataGridView2.Rows.Add(item.displayName);
             }
         }
 

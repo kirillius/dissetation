@@ -1,4 +1,5 @@
 ﻿using ScienceApp.db;
+using ScienceApp.interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +12,7 @@ using System.Windows.Forms;
 
 namespace ScienceApp
 {
-    public partial class dictionariesForm : Form
+    public partial class dictionariesForm : Form, onCreateDictionary
     {
         dissertationEntities context = new dissertationEntities();
         public dictionariesForm()
@@ -23,6 +24,22 @@ namespace ScienceApp
         {
             var dictionaries = context.dictionaries.ToList();
             dataGridView1.DataSource = dictionaries;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            newDictionary newD = new newDictionary(this);
+            newD.ShowDialog();
+        }
+
+        public void onFinalCreate(dictionaries newItem)
+        {
+            DataGridViewRow row = new DataGridViewRow();
+            row.Cells[0].Value = newItem.idDict;
+            row.Cells[1].Value = newItem.nameTable;
+            row.Cells[2].Value = newItem.displayName;
+
+            dataGridView1.Rows.Add(row);
         }
     }
 }
