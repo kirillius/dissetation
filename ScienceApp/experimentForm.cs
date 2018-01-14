@@ -57,5 +57,15 @@ namespace ScienceApp
                     startButton.Enabled = true;
             }
         }
+
+        private void startButton_Click(object sender, EventArgs e)
+        {
+            String parametersRequest = "";
+            foreach (DataGridViewRow row in dataGridView2.Rows)
+            {
+                parametersRequest += ("Справочник: " + row.Cells[0].Value + ", количество запросов: " + row.Cells[1].Value + "\n");
+            }
+            MessageBox.Show(parametersRequest);
+        }
     }
 }
