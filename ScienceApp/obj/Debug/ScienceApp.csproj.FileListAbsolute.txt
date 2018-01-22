@@ -13,3 +13,23 @@ C:\Users\Elena\documents\visual studio 2015\Projects\scienceAp\ScienceApp\obj\De
 C:\Users\Elena\documents\visual studio 2015\Projects\scienceAp\ScienceApp\bin\Debug\EntityFramework.dll
 C:\Users\Elena\documents\visual studio 2015\Projects\scienceAp\ScienceApp\bin\Debug\EntityFramework.xml
 C:\Users\Elena\documents\visual studio 2015\Projects\scienceAp\ScienceApp\obj\Debug\ScienceApp.newDictionary.resources
+C:\Users\Оля\Documents\Projects\dissetation\ScienceApp\obj\Debug\ScienceApp.csprojResolveAssemblyReference.cache
+C:\Users\Оля\Documents\Projects\dissetation\ScienceApp\obj\Debug\ScienceApp.dictionariesForm.resources
+C:\Users\Оля\Documents\Projects\dissetation\ScienceApp\obj\Debug\ScienceApp.experimentForm.resources
+C:\Users\Оля\Documents\Projects\dissetation\ScienceApp\obj\Debug\ScienceApp.Form1.resources
+C:\Users\Оля\Documents\Projects\dissetation\ScienceApp\obj\Debug\ScienceApp.historyForm.resources
+C:\Users\Оля\Documents\Projects\dissetation\ScienceApp\obj\Debug\ScienceApp.newDictionary.resources
+C:\Users\Оля\Documents\Projects\dissetation\ScienceApp\obj\Debug\ScienceApp.Properties.Resources.resources
+C:\Users\Оля\Documents\Projects\dissetation\ScienceApp\obj\Debug\ScienceApp.csproj.GenerateResource.Cache
+C:\Users\Оля\Documents\Projects\dissetation\ScienceApp\obj\Debug\ScienceApp.csproj.CoreCompileInputs.cache
+C:\Users\Оля\Documents\Projects\dissetation\ScienceApp\bin\Debug\ScienceApp.exe.config
+C:\Users\Оля\Documents\Projects\dissetation\ScienceApp\bin\Debug\ScienceApp.exe
+C:\Users\Оля\Documents\Projects\dissetation\ScienceApp\bin\Debug\ScienceApp.pdb
+C:\Users\Оля\Documents\Projects\dissetation\ScienceApp\bin\Debug\EntityFramework.dll
+C:\Users\Оля\Documents\Projects\dissetation\ScienceApp\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Оля\Documents\Projects\dissetation\ScienceApp\bin\Debug\EntityFramework.xml
+C:\Users\Оля\Documents\Projects\dissetation\ScienceApp\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Оля\Documents\Projects\dissetation\ScienceApp\bin\Debug\ru\EntityFramework.resources.dll
+C:\Users\Оля\Documents\Projects\dissetation\ScienceApp\bin\Debug\ru\EntityFramework.SqlServer.resources.dll
+C:\Users\Оля\Documents\Projects\dissetation\ScienceApp\obj\Debug\ScienceApp.exe
+C:\Users\Оля\Documents\Projects\dissetation\ScienceApp\obj\Debug\ScienceApp.pdb
