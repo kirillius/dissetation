@@ -15,7 +15,7 @@ namespace ScienceApp
     public partial class experimentForm : Form
     {
         dissertationEntities context = new dissertationEntities();
-        List<Dictionary<String, String>> taskRequest;
+        Dictionary<String, String> taskRequest;
         string connectionString;
 
         public experimentForm()
@@ -26,8 +26,8 @@ namespace ScienceApp
 
         private void experimentForm_Load(object sender, EventArgs e)
         {
-            List<dictionaries> listDictionaries = context.dictionaries.ToList(); 
-            foreach(var item in listDictionaries)
+            List<dictionaries> listDictionaries = context.dictionaries.ToList();
+            foreach (var item in listDictionaries)
             {
                 dataGridView2.Rows.Add(item.displayName, item.nameTable);
             }
@@ -36,7 +36,7 @@ namespace ScienceApp
         private void button1_Click(object sender, EventArgs e)
         {
             var currentRow = dataGridView2.CurrentRow;
-            if(currentRow!=null)
+            if (currentRow != null)
             {
                 dataGridView1.Rows.Add(dataGridView2.Rows[currentRow.Index].Cells[0].Value, 0, dataGridView2.Rows[currentRow.Index].Cells[1].Value);
                 dataGridView2.Rows.Remove(currentRow);
@@ -56,7 +56,7 @@ namespace ScienceApp
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             var currentRow = dataGridView1.CurrentRow;
-            if(currentRow!=null)
+            if (currentRow != null)
             {
                 if (dataGridView1.Rows[currentRow.Index].Cells[1].Value != null)
                     startButton.Enabled = true;
@@ -66,15 +66,11 @@ namespace ScienceApp
         private void startButton_Click(object sender, EventArgs e)
         {
             String parametersRequest = "";
-            taskRequest = new List<Dictionary<string, string>>();
+            taskRequest = new Dictionary<string, string>();
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 parametersRequest += ("Справочник: " + row.Cells[0].Value + ", количество запросов: " + row.Cells[1].Value + "\n");
-
-                Dictionary<String, String> item = new Dictionary<string, string>();
-                item.Add("nameTable", row.Cells[2].Value.ToString());
-                item.Add("countRequest", row.Cells[1].Value.ToString());
-                taskRequest.Add(item);
+                taskRequest.Add(row.Cells[2].Value.ToString(), row.Cells[1].Value.ToString());
             }
             richTextBox1.Text = "Начата отправка запросов на сервер БД со следующей конфигурацией:\n" + parametersRequest;
             executeTaskRequest();
@@ -85,27 +81,52 @@ namespace ScienceApp
             if (taskRequest == null)
                 return;
 
-            //берем конфиг запросов, делаем
+            string selectString = "SELECT * FROM ";
+            Task[] tasksQuery = new Task[taskRequest.Keys.Count];
+
+            int i = 0;
+            foreach (var key in taskRequest.Keys)
+            {
+                tasksQuery[i] = new Task(() => sendQuery(selectString + key, Int32.Parse(taskRequest[key])));
+                i++;
+            }
+
+            foreach (var t in tasksQuery)
+                if(t!=null)
+                    t.Start();
+        }
+
+        private void sendQuery(String query, int count)
+        {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                foreach (var item in taskRequest)
+                int successRequest = 0, errorRequest = 0;
+                List<string> errorList = new List<string>();
+                richTextBox1.Invoke((MethodInvoker)delegate
                 {
-                    string queryString = "SELECT * FROM [dbo].[mos]";
-                    SqlCommand command = new SqlCommand(queryString, connection);
+                    richTextBox1.Text += "\nНачата обработка запроса " + query;
+                });
+                for (var i = 0; i < count; i++)
+                {
+                    SqlCommand command = new SqlCommand(query, connection);
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
                     try
                     {
                         while (reader.Read())
                         {
-                            String text = String.Format("Полученная запись: {0}, {1}", reader["id"], reader["name"]);
-                            richTextBox1.Text += "\n" + text;
+                            /*String text = String.Format("Полученная запись: {0}, {1}", reader["id"], reader["name"]);
+                            richTextBox1.Invoke((MethodInvoker)delegate
+                            {
+                                richTextBox1.Text += "\n" + text;
+                            });*/
+                            successRequest++;
                         }
                     }
-                    catch(Exception exp)
+                    catch (Exception exp)
                     {
-                        String text = String.Format("Ошибка: {0}", exp.Message);
-                        richTextBox1.Text += "\n" + text;
+                        errorList.Add(String.Format("Ошибка: {0}", exp.Message));
+                        errorRequest++;
                     }
                     finally
                     {
@@ -113,6 +134,22 @@ namespace ScienceApp
                         reader.Close();
                         connection.Close();
                     }
+                }
+
+                string text = "\nПо запросу " + query + " успешных выполнений: " + successRequest + ", выполнений с ошибкой: " + errorRequest;
+                richTextBox1.Invoke((MethodInvoker)delegate
+                {
+                    richTextBox1.Text += "\n" + text;
+                });
+
+                if (errorRequest>0)
+                {
+                    string delimiter = "\n";
+                    string errorText = "Ошибки:\n"+ errorList.Aggregate((i, j) => i + delimiter + j);
+                    richTextBox1.Invoke((MethodInvoker)delegate
+                    {
+                        richTextBox1.Text += "\n" + errorText;
+                    });
                 }
             }
         }
