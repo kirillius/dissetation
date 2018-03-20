@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,7 @@ namespace ScienceApp
         public experimentForm()
         {
             InitializeComponent();
-            connectionString = "Server=185.158.153.126;Database=dissertation;User Id=rental;Password=kirillius1991;";
+            connectionString = "Server=185.158.153.126;Database=dissertation;User Id=rental;Password=kirillius1991;pooling=false";
         }
 
         private void experimentForm_Load(object sender, EventArgs e)
@@ -108,20 +109,16 @@ namespace ScienceApp
                 });
                 for (var i = 0; i < count; i++)
                 {
+                    Stopwatch stopWatch = new Stopwatch();
+                    stopWatch.Start();
+
                     SqlCommand command = new SqlCommand(query, connection);
-                    connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
+                    SqlDataReader reader = null;
                     try
                     {
-                        while (reader.Read())
-                        {
-                            /*String text = String.Format("Полученная запись: {0}, {1}", reader["id"], reader["name"]);
-                            richTextBox1.Invoke((MethodInvoker)delegate
-                            {
-                                richTextBox1.Text += "\n" + text;
-                            });*/
-                            successRequest++;
-                        }
+                        connection.Open();
+                        reader = command.ExecuteReader();
+                        successRequest++;
                     }
                     catch (Exception exp)
                     {
@@ -131,8 +128,24 @@ namespace ScienceApp
                     finally
                     {
                         // Always call Close when done reading.
-                        reader.Close();
+                        if(reader!=null)
+                            reader.Close();
+
                         connection.Close();
+
+                        stopWatch.Stop();
+                        // Get the elapsed time as a TimeSpan value.
+                        TimeSpan ts = stopWatch.Elapsed;
+
+                        // Format and display the TimeSpan value.
+                        string elapsedTime = String.Format("{0:00}:{1:00}.{2:00}",
+                            ts.Minutes, ts.Seconds,
+                            ts.Milliseconds / 10);
+
+                        richTextBox1.Invoke((MethodInvoker)delegate
+                        {
+                            richTextBox1.Text += "\nВремя выполнения запроса: " + elapsedTime;
+                        });
                     }
                 }
 
