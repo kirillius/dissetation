@@ -1,4 +1,5 @@
 ﻿using ScienceApp.db;
+using ScienceApp.service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,22 +16,48 @@ namespace ScienceApp
 {
     public partial class experimentForm : Form
     {
-        dissertationEntities context = new dissertationEntities();
+        //dissertationEntities context = new dissertationEntities();
         Dictionary<String, String> taskRequest;
         string connectionString;
+        GenerateThreads[] threads;
+        List<Dictionary<string, string>> queries;
+        int countUsers;
 
         public experimentForm()
         {
             InitializeComponent();
             connectionString = "Server=185.158.153.126;Database=dissertation;User Id=rental;Password=kirillius1991;pooling=false";
+            queries = new List<Dictionary<string, string>>()
+            {
+                new Dictionary<string, string>()
+                {
+                    {"displayName", "Запрос на чтение документа" },
+                    {"query", "select * from doctors" }
+                },
+                new Dictionary<string, string>()
+                {
+                    {"displayName", "Запрос на запись документа" },
+                    {"query", "select * from doctors" }
+                },
+                new Dictionary<string, string>()
+                {
+                    {"displayName", "Запрос на чтение объекта с 3-join" },
+                    {"query", "select * from doctors" }
+                },
+                new Dictionary<string, string>()
+                {
+                    {"displayName", "Запрос на запись объекта с 3-join" },
+                    {"query", "select * from doctors" }
+                }
+            };
         }
 
         private void experimentForm_Load(object sender, EventArgs e)
         {
-            List<dictionaries> listDictionaries = context.dictionaries.ToList();
-            foreach (var item in listDictionaries)
+            /*List<dictionaries> listDictionaries = context.dictionaries.ToList();*/
+            foreach (var item in queries)
             {
-                dataGridView2.Rows.Add(item.displayName, item.nameTable);
+                dataGridView2.Rows.Add(item["displayName"], item["query"]);
             }
         }
 
@@ -66,7 +93,7 @@ namespace ScienceApp
 
         private void startButton_Click(object sender, EventArgs e)
         {
-            String parametersRequest = "";
+            /*String parametersRequest = "";
             taskRequest = new Dictionary<string, string>();
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
@@ -74,7 +101,14 @@ namespace ScienceApp
                 taskRequest.Add(row.Cells[2].Value.ToString(), row.Cells[1].Value.ToString());
             }
             richTextBox1.Text = "Начата отправка запросов на сервер БД со следующей конфигурацией:\n" + parametersRequest;
-            executeTaskRequest();
+            executeTaskRequest();*/
+            countUsers = Convert.ToInt32(textBox1.Text);
+            threads = new GenerateThreads[countUsers];
+            Random rnd = new Random();
+            for(int i=0; i<countUsers; i++)
+            {
+                threads[i] = new GenerateThreads(Convert.ToInt32(dataGridView1.Rows[0].Cells[1].Value), dataGridView1.Rows[0].Cells[2].Value.ToString(), rnd);
+            }
         }
 
         private void executeTaskRequest()
@@ -103,6 +137,7 @@ namespace ScienceApp
             {
                 int successRequest = 0, errorRequest = 0;
                 List<string> errorList = new List<string>();
+                double allTime=0;
                 richTextBox1.Invoke((MethodInvoker)delegate
                 {
                     richTextBox1.Text += "\nНачата обработка запроса " + query;
@@ -136,6 +171,7 @@ namespace ScienceApp
                         stopWatch.Stop();
                         // Get the elapsed time as a TimeSpan value.
                         TimeSpan ts = stopWatch.Elapsed;
+                        allTime += ts.TotalSeconds;
 
                         // Format and display the TimeSpan value.
                         string elapsedTime = String.Format("{0:00}:{1:00}.{2:00}",
@@ -149,7 +185,8 @@ namespace ScienceApp
                     }
                 }
 
-                string text = "\nПо запросу " + query + " успешных выполнений: " + successRequest + ", выполнений с ошибкой: " + errorRequest;
+                string avgTime = String.Format("{0:00.0000} сек.", allTime / count);
+                string text = "\nПо запросу " + query + " успешных выполнений: " + successRequest + ", выполнений с ошибкой: " + errorRequest + ", среднее время выполнения: "+avgTime;
                 richTextBox1.Invoke((MethodInvoker)delegate
                 {
                     richTextBox1.Text += "\n" + text;
@@ -164,6 +201,34 @@ namespace ScienceApp
                         richTextBox1.Text += "\n" + errorText;
                     });
                 }
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            int user = 1;
+            richTextBox1.Text = "";
+            foreach (var thread in threads)
+            {
+                List<TaskQuery> tasks = thread.getArray();
+                int i = 1;
+                foreach (var item in tasks)
+                {
+                    string resultText = (item.getResult()==1) ? "выполнился успешно" : item.getResult() == 0 ? "выполнился неуспешно" : "еще выполняется";
+                    if (item.getResult()==0)
+                        resultText += " ошибка: " + tasks[0].getError();
+
+                    string formatResult= String.Format("Юзер {0}, запрос №{1}, {2}", user, i, resultText);
+                    string formatResultPart2 = String.Format(" за {0}", item.getTime());
+
+                    if (item.getResult() != -1)
+                        formatResult += formatResultPart2;
+
+                    richTextBox1.Text += formatResult + "\n";
+                    i++;
+                }
+
+                user++;
             }
         }
     }

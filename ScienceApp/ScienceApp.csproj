@@ -98,6 +98,18 @@
     <Compile Include="experimentForm.Designer.cs">
       <DependentUpon>experimentForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="experimentWithIndex.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="experimentWithIndex.Designer.cs">
+      <DependentUpon>experimentWithIndex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="experimentWithStored.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="experimentWithStored.Designer.cs">
+      <DependentUpon>experimentWithStored.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +123,12 @@
       <DependentUpon>historyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="interfaces\onCreateDictionary.cs" />
+    <Compile Include="listStoredProcedures.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="listStoredProcedures.Designer.cs">
+      <DependentUpon>listStoredProcedures.cs</DependentUpon>
+    </Compile>
     <Compile Include="newDictionary.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,6 +137,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="service\CalculateTimesThread.cs" />
+    <Compile Include="service\GenerateThreads.cs" />
+    <Compile Include="service\TaskQuery.cs" />
     <Compile Include="SettingDB.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,11 +152,20 @@
     <EmbeddedResource Include="experimentForm.resx">
       <DependentUpon>experimentForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="experimentWithIndex.resx">
+      <DependentUpon>experimentWithIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="experimentWithStored.resx">
+      <DependentUpon>experimentWithStored.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="historyForm.resx">
       <DependentUpon>historyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="listStoredProcedures.resx">
+      <DependentUpon>listStoredProcedures.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="newDictionary.resx">
       <DependentUpon>newDictionary.cs</DependentUpon>

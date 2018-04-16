@@ -27,16 +27,16 @@ namespace ScienceApp
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            experimentForm expForm = new experimentForm();
+            /*experimentForm expForm = new experimentForm();
             expForm.MdiParent = this;
-            expForm.Show();
+            expForm.Show();*/
         }
 
         private void историяЭкспериментовToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            historyForm history = new historyForm();
-            history.MdiParent = this;
-            history.Show();
+            experimentWithStored experimentStored = new experimentWithStored();
+            experimentStored.MdiParent = this;
+            experimentStored.Show();
         }
 
         private void подключениеКБДToolStripMenuItem_Click(object sender, EventArgs e)
@@ -51,6 +51,20 @@ namespace ScienceApp
             dictionariesForm dictionaries = new dictionariesForm();
             dictionaries.MdiParent = this;
             dictionaries.Show();
+        }
+
+        private void экспериментСИндексамиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            experimentWithIndex experimentIndex = new experimentWithIndex();
+            experimentIndex.MdiParent = this;
+            experimentIndex.Show();
+        }
+
+        private void хранимыеПроцедурыБДToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listStoredProcedures procedures = new listStoredProcedures();
+            procedures.MdiParent = this;
+            procedures.Show();
         }
     }
 }
